@@ -1,0 +1,25 @@
+# Rules template for data quality checks
+# Each rule should have: name, type, severity
+# Types supported in this template: formula, regex, range
+
+rules:
+  - name: total_amount_formula
+    type: formula
+    expr: "quantity * price == total_amount"
+    columns: [quantity, price, total_amount]
+    severity: critical
+
+  - name: client_email_format
+    type: regex
+    column: client_email
+    pattern: '^[^@]+@[^@]+\.[^@]+'
+    severity: warning
+
+  - name: price_range
+    type: range
+    column: price
+    min: 0.01
+    max: 100000.0
+    severity: warning
+
+# To add more rules, copy one of the examples and adjust fields.
